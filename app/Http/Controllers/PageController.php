@@ -28,7 +28,7 @@ class PageController extends Controller
                 return ['error' => 'Gagal mengambil data dari server.', 'status' => $response->status()];
             }
 
-            return $response->json();
+            return $response->json() ?? [];
 
         } catch (ConnectionException $e) {
             // Return an error structure if connection fails
