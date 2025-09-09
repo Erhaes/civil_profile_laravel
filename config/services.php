@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'api' => [
+        'base_url' => env('API_BASE_URL', 'https://reservasi.labsipilunsoed.com/api'),
+        'storage_url' => env('API_STORAGE_URL', 'https://reservasi.labsipilunsoed.com/storage'),
+    ],
+
 ];
