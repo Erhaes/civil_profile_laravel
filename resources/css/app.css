@@ -121,4 +121,38 @@
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
+
+    .testimonial-column {
+    /* Animasi default untuk layar besar (vertikal) */
+    animation: scroll-vertical 40s linear infinite;
+    }
+
+    @media (max-width: 1023px) {
+    .testimonial-column {
+        /* Animasi untuk layar kecil (horizontal) */
+        animation: scroll-horizontal 60s linear infinite;
+    }
+    }
+
+    /* Arah scroll yang berbeda untuk setiap kolom */
+    [data-direction="down"] {
+    animation-direction: reverse;
+    }
+
+    /* Jeda animasi saat di-hover */
+    #testimonial-container[data-animated="true"]:hover .testimonial-column {
+    animation-play-state: paused;
+    }
+
+    @keyframes scroll-vertical {
+    to {
+        transform: translateY(-50%);
+    }
+    }
+
+    @keyframes scroll-horizontal {
+    to {
+        transform: translateX(-50%);
+    }
+    }
 }

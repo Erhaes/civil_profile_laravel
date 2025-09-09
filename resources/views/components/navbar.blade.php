@@ -60,10 +60,6 @@
                     text-light-base gradient-to-r from-blue-base to-blue-secondary bg-gradient-to-br
                 @endif
               "
-              {{-- Buka di tab baru jika link eksternal --}}
-              @if (Str::startsWith($item['path'], 'http'))
-                target="_blank" rel="noopener noreferrer"
-              @endif
             >
               {{ $item['title'] }}
             </a>

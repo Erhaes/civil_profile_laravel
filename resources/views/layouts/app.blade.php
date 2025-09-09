@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
     {{-- Compiled CSS --}}
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     {{-- Inline style to apply font --}}
     <style>
@@ -39,9 +39,6 @@
 
     {{-- Include Footer Component --}}
     @include('components.footer')
-
-    {{-- Compiled JavaScript --}}
-    <script src="{{ asset('js/app.js') }}"></script>
     
     {{-- Additional scripts for specific pages --}}
     @stack('scripts')
