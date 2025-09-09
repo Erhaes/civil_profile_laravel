@@ -40,7 +40,7 @@
                     @if ($page === '...')
                         <span class="px-4 py-2 border-t border-b border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500 text-sm">...</span>
                     @else
-                        {{-- **PERUBAHAN KUNCI:** Gunakan $baseUrl untuk membuat link --}}
+                        
                         <a 
                             href="{{ $baseUrl }}?page={{ $page }}"
                             class="px-4 py-2 border-t border-b border-gray-300 dark:border-gray-600 text-sm {{ $currentPage == $page ? 'bg-sipil-base text-white' : 'bg-white dark:bg-gray-700 hover:bg-gray-50' }}"
