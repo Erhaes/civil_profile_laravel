@@ -1,8 +1,10 @@
 /**
  * Homepage Animations
+ *
+ * This script initializes the Swiper.js carousel for the 'About' section
+ * and handles the infinite scrolling animation for the 'Testimonial' section.
  */
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+import Swiper from 'swiper/bundle'; // Kita tetap butuh JS-nya
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -10,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const aboutSwiperEl = document.querySelector('.homepage-about-swiper');
     if (aboutSwiperEl) {
         new Swiper(aboutSwiperEl, {
-            modules: [Swiper.Navigation, Swiper.Pagination, Swiper.Autoplay],
+            // Kita tidak perlu lagi mengimpor modul di sini karena 'swiper/bundle' sudah mencakup semuanya
             loop: true,
             autoplay: {
                 delay: 4000,
@@ -30,18 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Infinite Scroller for Testimonials
     const testimonialContainer = document.getElementById('testimonial-container');
-    if (testimonialContainer) {
+    if (testimonialContainer && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        testimonialContainer.setAttribute("data-animated", "true");
+
         const columns = testimonialContainer.querySelectorAll('.testimonial-column');
-        
-        // Gandakan konten di setiap kolom untuk menciptakan ilusi tak terbatas
         columns.forEach(column => {
             const content = column.innerHTML;
             column.innerHTML += content;
         });
-
-        // Tidak ada animasi di prefer-reduced-motion
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            testimonialContainer.setAttribute("data-animated", "true");
-        }
     }
 });

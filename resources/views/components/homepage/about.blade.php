@@ -38,8 +38,16 @@
             <div class="swiper-wrapper">
               @foreach($carouselLabs as $lab)
                 @php
-                  // API kadang mengembalikan string JSON, kadang hanya nama file
-                  $images = json_decode($lab['images'], true) ?? [$lab['images']];
+                    $imageData = $lab['images'];
+                    $images = []; // Default ke array kosong
+
+                    if (is_array($imageData)) {
+                        // Jika sudah menjadi array, gunakan langsung.
+                        $images = $imageData;
+                    } elseif (is_string($imageData)) {
+                        // Jika ini adalah string, coba decode. Jika gagal, anggap itu path tunggal.
+                        $images = json_decode($imageData, true) ?? [$imageData];
+                    }
                 @endphp
                 @foreach($images as $image)
                   <div class="swiper-slide">

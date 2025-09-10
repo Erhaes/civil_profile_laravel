@@ -1,7 +1,4 @@
-{{--
-  File ini membutuhkan variabel $standards yang dikirim dari PageController.
-  Variabel ini berisi data standar/sertifikasi yang diambil dari API.
---}}
+
 <section
   id="akreditasi"
   class="section-padding-x pt-12 pb-12 text-dark-base dark:text-light-base bg-light-base dark:bg-dark-base scroll-mt-12"
@@ -15,14 +12,17 @@
         Laboratorium Teknik Sipil Unsoed Memenuhi Standar Nasional dan
         Internasional
       </h2>
+      <p>
+        Demi memastikan bahwa hasil pengujian yang dilakukan di
+        Laboratorium Teknik Sipil UNSOED hasilnya akurat dan
+        konsisten dengan instrumen lainnya, maka kami
+        melakukan kalibrasi alat pengujian secara berkala setiap 1
+        tahun sekali.
+      </p>
     </div>
 
     @if (!empty($standards))
-      {{--
-        Container ini dibuat scrollable secara horizontal pada layar kecil.
-        Class `scrollbar-hide` adalah class kustom dari CSS Anda.
-      --}}
-      <div class="flex flex-nowrap overflow-x-auto gap-4 py-4 scrollbar-hide">
+      <div class="flex flex-nowrap overflow-x-auto gap-4 py-4 scrollbar-hide justify-center">
         @foreach($standards as $item)
           <div class="flex-none w-72 bg-white rounded-lg shadow-md border border-gray-200 dark:border-gray-700 dark:bg-gray-800">
             <div class="w-full h-40 rounded-t-lg flex items-center justify-center overflow-hidden p-4 bg-gray-100 dark:bg-gray-700">
@@ -34,7 +34,7 @@
               />
             </div>
             <div class="p-4">
-              <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-1 line-clamp-1">
+              <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-1">
                 {{ $item['nama'] }}
               </h3>
               <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 line-clamp-2 h-10">
