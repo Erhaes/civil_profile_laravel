@@ -32,20 +32,18 @@
       {{-- Left Column - Image Carousel --}}
       <div class="relative rounded-lg overflow-hidden h-full">
         @if (!empty($carouselLabs))
-          {{-- Kita akan menggunakan library Swiper.js untuk fungsionalitas carousel --}}
-          {{-- Pastikan untuk menginstal Swiper.js via npm dan mengimpornya di app.js --}}
           <div class="swiper homepage-about-swiper rounded-lg shadow-lg">
             <div class="swiper-wrapper">
               @foreach($carouselLabs as $lab)
                 @php
                     $imageData = $lab['images'];
-                    $images = []; // Default ke array kosong
+                    $images = [];
 
                     if (is_array($imageData)) {
-                        // Jika sudah menjadi array, gunakan langsung.
+                        
                         $images = $imageData;
                     } elseif (is_string($imageData)) {
-                        // Jika ini adalah string, coba decode. Jika gagal, anggap itu path tunggal.
+                        
                         $images = json_decode($imageData, true) ?? [$imageData];
                     }
                 @endphp

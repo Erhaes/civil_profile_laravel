@@ -40,7 +40,7 @@
             Reservasi Laboratorium
           </a>
           <a
-            href="https://www.youtube.com/watch?v=QMn3g51K_S0&t=103s"
+            href="https://youtu.be/QMn3g51K_S0?si=T_gvhmO2OeuyDoOv"
             target="_blank"
             rel="noopener noreferrer"
             class="rounded-md border border-blue-base text-blue-base py-2 px-4 font-semibold hover:bg-blue-quaternary transition duration-300 small-font-size"
