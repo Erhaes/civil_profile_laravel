@@ -1,7 +1,7 @@
 <section
   id="hero"
-  class="bg-light-base text-dark-base section-padding-x pt-24 lg:pt-32 pb-12 scroll-mt-12 relative"
-  style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724%27 height=%2724%27 viewBox=%270 0 24 24%27%3E%3Cg fill=%27%2399a1af%27 fill-opacity=%270.1%27%3E%3Cpolygon fill-rule=%27evenodd%27 points=%278 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4%27/%3E%3C/g%3E%3C/svg%3E')"
+  class="bg-light-base text-dark-base section-padding-x pt-24 lg:pt-32 pb-12 scroll-mt-12 relative dark:bg-dark-base dark:text-light-base"
+  {{-- style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724%27 height=%2724%27 viewBox=%270 0 24 24%27%3E%3Cg fill=%27%2399a1af%27 fill-opacity=%270.1%27%3E%3Cpolygon fill-rule=%27evenodd%27 points=%278 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4%27/%3E%3C/g%3E%3C/svg%3E')" --}}
 >
   <div class="max-w-screen-xl mx-auto flex gap-4 flex-col xl:flex-row justify-between relative">
     <div class="hero-animate-1">
