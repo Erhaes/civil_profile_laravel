@@ -6,8 +6,6 @@
 <section class="bg-light-base dark:bg-dark-base text-dark-base dark:text-light-base section-padding-x py-16">
   <div class="max-w-screen-xl mx-auto">
     
-    {{-- TODO: Filter Controls bisa ditambahkan di sini di masa depan --}}
-
     {{-- Tampilkan pesan error jika ada --}}
     @if (!empty($apiData['error']))
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center">

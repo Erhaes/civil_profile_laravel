@@ -50,18 +50,18 @@
 
             <div class="grid grid-cols-2 gap-4 mb-8">
               <div class="bg-light-base bg-opacity-10 rounded-lg p-4 text-center">
-                <div class="text-2xl font-bold text-white mb-1">
+                <div class="text-2xl font-bold text-emerald-800 mb-1">
                   {{ count($facility['tests'] ?? []) }}
                 </div>
-                <div class="text-sm text-blue-200">
+                <div class="text-sm text-blue-800">
                   Pengujian Tersedia
                 </div>
               </div>
               <div class="bg-light-base bg-opacity-10 rounded-lg p-4 text-center">
-                <div class="text-2xl font-bold text-white mb-1">
+                <div class="text-2xl font-bold text-orange-700 mb-1">
                   {{ count($facility['packages'] ?? []) }}
                 </div>
-                <div class="text-sm text-blue-200">Paket Layanan</div>
+                <div class="text-sm text-blue-800">Paket Layanan</div>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
 
     {{-- Tests Detail Section --}}
     @if (!empty($facility['tests']))
-      <section class="bg-gradient-to-b from-gray-50 to-white section-padding-x py-8">
+      <section class="bg-gradient-to-b from-gray-50 to-white section-padding-x py-8 dark:bg-dark-base">
         <div class="max-w-screen-xl mx-auto">
           <div class="text-center mb-8">
             <h2 class="text-4xl font-bold text-dark-base mb-4">
