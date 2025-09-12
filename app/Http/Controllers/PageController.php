@@ -51,7 +51,6 @@ class PageController extends Controller
 
     public function profile()
     {
-        // Halaman profil saat ini tidak mengambil data dari API secara langsung
         return view('pages.profile');
     }
 

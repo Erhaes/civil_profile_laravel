@@ -3,7 +3,6 @@
 --}}
 @extends('layouts.app')
 
-{{-- Judul dan deskripsi dinamis berdasarkan data fasilitas --}}
 @section('title', ($facility['name'] ?? 'Detail Fasilitas') . ' | Lab. Teknik Sipil Unsoed')
 @section('description', $facility['description'] ?? 'Detail fasilitas dan layanan yang tersedia di Laboratorium Teknik Sipil Unsoed.')
 

@@ -1,7 +1,5 @@
 {{--
   Konten untuk tab Standar Laboratorium (Sertifikasi).
-  Sama seperti tab struktur, ini menggunakan Alpine.js untuk mengambil
-  data secara dinamis saat tab ini aktif.
 --}}
 <div
   x-data="{
