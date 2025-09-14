@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PageController extends Controller
 {
@@ -37,6 +40,24 @@ class PageController extends Controller
         }
     }
 
+    private function createPaginator(array $apiResponse, Request $request): LengthAwarePaginator
+    {
+        $items = $apiResponse['data'] ?? [];
+        $total = $apiResponse['total'] ?? 0;
+        $perPage = $apiResponse['per_page'] ?? 10;
+        $currentPage = $apiResponse['current_page'] ?? 1;
+
+        $collection = new Collection($items);
+
+        return new LengthAwarePaginator(
+            $collection,
+            $total,
+            $perPage,
+            $currentPage,
+            ['path' => Paginator::resolveCurrentPath()]
+        );
+    }
+
     public function home()
     {
         $carouselLabs = $this->getFromApi('carousel/laboratories');
@@ -58,7 +79,10 @@ class PageController extends Controller
     {
         $page = $request->input('page', 1);
         $apiResponse = $this->getFromApi('labs', ['page' => $page, 'per_page' => 16]);
-        return view('pages.facilities.index', ['apiData' => $apiResponse]);
+        
+        $facilities = $this->createPaginator($apiResponse, $request);
+
+        return view('pages.facilities.index', compact('facilities'));
     }
     
     public function facilityDetail($slug)
@@ -71,7 +95,10 @@ class PageController extends Controller
     {
         $page = $request->input('page', 1);
         $apiResponse = $this->getFromApi('tests', ['page' => $page, 'per_page' => 8, 'is_active' => 1]);
-        return view('pages.tests.index', ['apiData' => $apiResponse]);
+        
+        $tests = $this->createPaginator($apiResponse, $request);
+
+        return view('pages.tests.index', compact('tests'));
     }
 
     public function testDetail($slug)
@@ -84,7 +111,10 @@ class PageController extends Controller
     {
         $page = $request->input('page', 1);
         $apiResponse = $this->getFromApi('news', ['page' => $page, 'per_page' => 8]);
-        return view('pages.news.index', ['apiData' => $apiResponse]);
+        
+        $news = $this->createPaginator($apiResponse, $request);
+
+        return view('pages.news.index', compact('news'));
     }
 
     public function newsDetail($slug)
@@ -102,6 +132,9 @@ class PageController extends Controller
     {
         $page = $request->input('page', 1);
         $apiResponse = $this->getFromApi('downloads', ['page' => $page, 'per_page' => 2]);
-        return view('pages.downloads', ['apiData' => $apiResponse]);
+        
+        $downloads = $this->createPaginator($apiResponse, $request);
+
+        return view('pages.downloads', compact('downloads'));
     }
 }

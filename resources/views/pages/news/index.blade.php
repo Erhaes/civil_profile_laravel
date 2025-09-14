@@ -16,6 +16,6 @@
   @include('components.news.header')
 
   {{-- 2. News Main Content (Grid & Pagination) --}}
-  @include('components.news.main', ['apiData' => $apiData])
+  @include('components.news.main', ['news' => $news])
 
 @endsection

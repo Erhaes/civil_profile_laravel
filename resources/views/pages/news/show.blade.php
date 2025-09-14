@@ -14,7 +14,7 @@
       // Helper function
       function formatDateDetail($dateString) {
           $date = \Carbon\Carbon::parse($dateString);
-          return $date->translatedFormat('l, j F Y • H:i'); // e.g., Kamis, 21 Agustus 2025 • 15:30
+          return $date->translatedFormat('l, j F Y • H:i');
       }
       function getImageUrl($path) {
           if (!$path) return asset('images/news/eco-construction.jpg'); // Fallback
@@ -58,8 +58,8 @@
           </div>
 
           {{-- Featured Image --}}
-          <div class="relative h-64 md:h-96">
-            <img src="{{ getImageUrl($newsItem['thumbnail']) }}" alt="{{ $newsItem['title'] }}" class="object-cover w-full h-full" />
+          <div class="relative mx-5 h-64 md:h-96">
+            <img src="{{ getImageUrl($newsItem['thumbnail']) }}" alt="{{ $newsItem['title'] }}" class="object-cover w-full h-full rounded-2xl" />
           </div>
 
           {{-- Content --}}

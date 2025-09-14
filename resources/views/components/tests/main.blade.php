@@ -1,20 +1,15 @@
-
-@php
-  $tests = $apiData['data'] ?? [];
-@endphp
-
 <section class="bg-light-base dark:bg-dark-base text-dark-base dark:text-light-base section-padding-x py-16">
   <div class="max-w-screen-xl mx-auto">
     
     {{-- Tampilkan pesan error jika ada --}}
-    @if (!empty($apiData['error']))
+    @if (!empty($tests['error']))
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center">
-        <p>{{ $apiData['error'] }} (Status: {{ $apiData['status'] }})</p>
+        <p>{{ $tests['error'] }} (Status: {{ $tests['status'] }})</p>
       </div>
     @endif
 
     {{-- Tampilkan grid pengujian jika tidak ada error dan data tersedia --}}
-    @if (empty($apiData['error']) && !empty($tests))
+    @if (empty($tests['error']) && !empty($tests))
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         @foreach ($tests as $test)
           <div class="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow {{ !$test['is_active'] ? 'opacity-70' : '' }}">
@@ -74,11 +69,12 @@
         @endforeach
       </div>
 
-      {{-- Render link paginasi jika ada --}}
-      @include('components.partials.pagination', ['paginator' => $apiData])
+      <div class="mt-8">
+        {{ $tests->links() }}
+      </div>
 
     {{-- Tampilkan pesan jika data kosong --}}
-    @elseif (empty($apiData['error']))
+    @elseif (empty($tests['error']))
       <div class="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
         <p class="text-gray-500">Tidak ada layanan pengujian yang tersedia saat ini.</p>
       </div>

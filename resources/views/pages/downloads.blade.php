@@ -16,7 +16,7 @@
   @include('components.download.header')
 
   {{-- 2. Download Main Content (Table & Pagination) --}}
-  @include('components.download.main', ['apiData' => $apiData])
+  @include('components.download.main', ['downloads' => $downloads])
 
   {{-- 3. Download FAQ / Panduan --}}
   @include('components.download.faq')

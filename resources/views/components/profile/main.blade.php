@@ -1,11 +1,5 @@
 <section class="py-8 bg-light-base text-dark-base dark:bg-dark-base dark:text-light-base section-padding-x">
   <div class="max-w-screen-xl mx-auto">
-    {{--
-      Sistem Tab ini akan dikontrol oleh JavaScript (misalnya, Alpine.js)
-      untuk menangani perpindahan antar tab tanpa me-reload halaman.
-      Untuk implementasi Laravel murni, kita akan memuat data untuk tab pertama
-      secara default. Data untuk tab lain akan diambil via AJAX.
-    --}}
     <div x-data="{ activeTab: 'struktur' }">
       {{-- Navigasi Tab --}}
       <div class="flex overflow-x-auto scrollbar-hide py-2 space-x-4 mb-8 border-b border-gray-200 dark:border-gray-700">

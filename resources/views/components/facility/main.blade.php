@@ -1,20 +1,16 @@
 
-@php
-  $facilities = $apiData['data'] ?? [];
-@endphp
-
 <section class="bg-light-base dark:bg-dark-base text-dark-base dark:text-light-base section-padding-x py-16">
   <div class="max-w-screen-xl mx-auto">
     
     {{-- Tampilkan pesan error jika ada --}}
-    @if (!empty($apiData['error']))
+    @if (!empty($facilities['error']))
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center">
-        <p>{{ $apiData['error'] }} (Status: {{ $apiData['status'] }})</p>
+        <p>{{ $facilities['error'] }} (Status: {{ $facilities['status'] }})</p>
       </div>
     @endif
 
     {{-- Tampilkan grid fasilitas jika tidak ada error dan data tersedia --}}
-    @if (empty($apiData['error']) && !empty($facilities))
+    @if (empty($facilities['error']) && !empty($facilities))
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         @foreach ($facilities as $facility)
           <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
@@ -62,34 +58,12 @@
         @endforeach
       </div>
 
-      {{-- Render link paginasi jika ada --}}
-      @if (!empty($apiData['links']))
-        <div class="flex justify-center mt-8">
-            
-            <nav class="flex items-center">
-              @foreach ($apiData['links'] as $link)
-                @if ($link['url'])
-                  <a 
-                    href="{{ $link['url'] }}"
-                    class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm 
-                      {{ $link['active'] ? 'bg-sipil-base text-white' : 'bg-white dark:bg-gray-700 hover:bg-gray-50' }}
-                      {{ $loop->first ? 'rounded-l-md' : '' }}
-                      {{ $loop->last ? 'rounded-r-md' : '' }}"
-                  >
-                    {!! $link['label'] !!}
-                  </a>
-                @else
-                  <span class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm bg-gray-100 dark:bg-gray-800 text-gray-400 cursor-not-allowed {{ $loop->first ? 'rounded-l-md' : '' }} {{ $loop->last ? 'rounded-r-md' : '' }}">
-                    {!! $link['label'] !!}
-                  </span>
-                @endif
-              @endforeach
-            </nav>
-        </div>
-      @endif
+      <div class="mt-8">
+        {{ $facilities->links() }}
+      </div>
 
     {{-- Tampilkan pesan jika data kosong --}}
-    @elseif (empty($apiData['error']))
+    @elseif (empty($facilities['error']))
       <div class="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
         <p class="text-gray-500">Tidak ada fasilitas yang tersedia saat ini.</p>
       </div>

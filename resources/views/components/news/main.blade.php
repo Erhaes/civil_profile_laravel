@@ -1,6 +1,5 @@
 
 @php
-  $newsItems = $apiData['data'] ?? [];
 
   // Helper function untuk membersihkan HTML
   function stripHtml($html) {
@@ -23,16 +22,16 @@
   <div class="max-w-screen-xl mx-auto">
     
     {{-- Tampilkan pesan error jika ada --}}
-    @if (!empty($apiData['error']))
+    @if (!empty($news['error']))
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center">
-        <p>{{ $apiData['error'] }} (Status: {{ $apiData['status'] }})</p>
+        <p>{{ $news['error'] }} (Status: {{ $news['status'] }})</p>
       </div>
     @endif
 
     {{-- Tampilkan grid berita jika tidak ada error dan data tersedia --}}
-    @if (empty($apiData['error']) && !empty($newsItems))
+    @if (empty($news['error']) && !empty($news))
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        @foreach ($newsItems as $item)
+        @foreach ($news as $item)
           <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col">
             <div class="relative">
               <a href="{{ route('news.show', ['slug' => $item['slug']]) }}">
@@ -74,10 +73,12 @@
       </div>
 
       {{-- Render komponen paginasi --}}
-      @include('components.partials.pagination', ['paginator' => $apiData])
+      <div class="mt-8">
+        {{ $news->links() }}
+      </div>
 
     {{-- Tampilkan pesan jika data kosong --}}
-    @elseif (empty($apiData['error']))
+    @elseif (empty($news['error']))
       <div class="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
         <p class="text-gray-500">Tidak ada berita yang tersedia saat ini.</p>
       </div>

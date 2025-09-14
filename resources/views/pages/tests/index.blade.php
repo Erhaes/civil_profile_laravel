@@ -14,6 +14,6 @@
   @include('components.tests.header')
 
   {{-- 2. Tests Main Content (Grid & Pagination) --}}
-  @include('components.tests.main', ['apiData' => $apiData])
+  @include('components.tests.main', ['tests' => $tests])
 
 @endsection

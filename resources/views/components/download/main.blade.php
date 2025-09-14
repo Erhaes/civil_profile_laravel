@@ -1,20 +1,15 @@
-
-@php
-  $downloads = $apiData['data'] ?? [];
-@endphp
-
 <section class="py-16 bg-light-base dark:bg-dark-base text-dark-base dark:text-light-base section-padding-x">
   <div class="max-w-screen-xl mx-auto">
     
     {{-- Tampilkan pesan error jika ada --}}
-    @if (!empty($apiData['error']))
+    @if (!empty($downloads['error']))
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-center">
-        <p>{{ $apiData['error'] }} (Status: {{ $apiData['status'] }})</p>
+        <p>{{ $downloads['error'] }} (Status: {{ $downloads['status'] }})</p>
       </div>
     @endif
 
     {{-- Tampilkan tabel jika tidak ada error dan data tersedia --}}
-    @if (empty($apiData['error']) && !empty($downloads))
+    @if (empty($downloads['error']) && !empty($downloads))
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden extra-small-font-size">
         <div class="overflow-x-auto">
           <table class="w-full">
@@ -27,27 +22,27 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-              @foreach ($downloads as $index => $item)
+              @foreach ($downloads as $index => $download)
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td class="px-4 py-2 md:px-6 md:py-3 whitespace-nowrap">
-                    {{ $apiData['from'] + $index }}
+                    {{ $downloads['from'] + $index+1 }}
                   </td>
                   <td class="px-4 py-2 md:px-6 md:py-3">
                     <div class="font-medium text-sipil-base dark:text-sipil-blue-accent">
-                      {{ $item['title'] }}
+                      {{ $download['title'] }}
                     </div>
                     <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      Tanggal: {{ \Carbon\Carbon::parse($item['created_at'])->translatedFormat('j F Y') }}
+                      Tanggal: {{ \Carbon\Carbon::parse($download['created_at'])->translatedFormat('j F Y') }}
                     </div>
                   </td>
                   <td class="px-4 py-2 md:px-6 md:py-3">
                     <p class="text-gray-600 dark:text-gray-400 line-clamp-2 extra-small-font-size">
-                      {{ $item['description'] }}
+                      {{ $download['description'] }}
                     </p>
                   </td>
                   <td class="px-4 py-2 md:px-6 md:py-3 text-center whitespace-nowrap">
                     <a
-                      href="{{ config('services.api.storage_url') }}/{{ $item['file'] }}"
+                      href="{{ config('services.api.storage_url') }}/{{ $download['file'] }}"
                       class="inline-flex items-center gap-1 bg-sipil-base text-white py-2 px-4 rounded-md hover:bg-sipil-secondary transition-colors duration-200"
                       download
                       target="_blank"
@@ -63,11 +58,13 @@
         </div>
 
         {{-- Render komponen paginasi --}}
-        @include('components.partials.pagination', ['paginator' => $apiData])
+        <div class="mt-8">
+          {{ $downloads->links() }}
+        </div>
       </div>
 
     {{-- Tampilkan pesan jika data kosong --}}
-    @elseif (empty($apiData['error']))
+    @elseif (empty($downloads['error']))
       <div class="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
         <p class="text-gray-500">Tidak ada dokumen yang tersedia untuk diunduh saat ini.</p>
       </div>

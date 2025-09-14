@@ -16,6 +16,6 @@
   @include('components.facility.header')
 
   {{-- 2. Facility Main Content (Grid & Pagination) --}}
-  @include('components.facility.main', ['apiData' => $apiData])
-
+  @include('components.facility.main', ['facilities' => $facilities])
+  
 @endsection
