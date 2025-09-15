@@ -8,12 +8,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
-    /**
-     * Handle the submission of the contact form.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+    public function contact()
+    {
+        return view('pages.contact');
+    }
+    
     public function submit(Request $request)
     {
         // 1. Validasi input dari form
