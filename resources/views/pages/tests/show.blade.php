@@ -82,14 +82,14 @@
 
       {{-- Packages Section --}}
       @if (!empty($test['packages']))
-        <section class="py-16 bg-light-base text-dark-base section-padding-x">
+        <section class="py-16 bg-gray-50 dark:bg-gray-900 text-dark-base dark:text-gray-100 section-padding-x">
           <div class="max-w-screen-xl mx-auto">
             <h2 class="text-2xl font-bold mb-8">Paket Pengujian Terkait</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               @foreach ($test['packages'] as $pkg)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                   <div class="relative h-48"><img src="{{ config('services.api.storage_url') }}/{{ $pkg['images'][0] ?? '' }}" alt="{{ $pkg['name'] }}" class="object-cover w-full h-full" /><div class="absolute bottom-2 right-2"><span class="bg-black/70 text-white px-2 py-1 rounded text-sm">Rp {{ number_format($pkg['price'], 0, ',', '.') }}</span></div></div>
-                  <div class="p-4"><h3 class="font-bold text-lg mb-2">{{ $pkg['name'] }}</h3><p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $pkg['description'] }}</p></div>
+                  <div class="p-4"><h3 class="font-bold text-lg mb-2">{{ $pkg['name'] }}</h3><p class="text-gray-900 dark:text-gray-100 text-sm mb-4 line-clamp-2">{{ $pkg['description'] }}</p></div>
                 </div>
               @endforeach
             </div>

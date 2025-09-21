@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
 
-    // Hanya jalankan jika formulir kontak ada di halaman saat ini
     if (!contactForm) {
         return;
     }

@@ -41,6 +41,8 @@
         <article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           {{-- Header --}}
           <div class="p-6 md:p-8">
+            <a href="{{ route('news.index') }}" class="text-blue-300 hover:text-white flex items-center text-sm mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg> Kembali ke Daftar Berita</a>
+
             <div class="mb-4">
               <span class="inline-block bg-sipil-base text-white px-3 py-1 rounded-full text-sm font-medium">
                 {{ $newsItem['news_category']['name'] }}

@@ -10,7 +10,7 @@
   }
 @endphp
 
-<div class="flex-shrink-0 w-full lg:w-auto flex flex-col gap-4 p-4 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 max-w-2xl relative group">
+<div class="w-[80vw] max-w-sm sm:w-[350px] flex flex-col gap-4 p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 relative group">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 448 512"

@@ -129,7 +129,7 @@
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td class="px-4 py-3 whitespace-nowrap" x-text="apiData.from + index"></td>
                       <td class="px-4 py-3">
-                        <div class="font-medium text-sipil-base" x-text="item.title"></div>
+                        <div class="font-medium text-sipil-base dark:text-sipil-blue-accent" x-text="item.title"></div>
                         <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                           <div x-text="'Penulis: ' + formatAuthors(item.author)"></div>
                           <div x-text="'Tahun: ' + item.year"></div>

@@ -1,22 +1,57 @@
 /**
  * Homepage Animations
- *
- * This script initializes the Swiper.js carousel for the 'About' section
- * and handles the infinite scrolling animation for the 'Testimonial' section.
  */
-import Swiper from 'swiper/bundle'; // Kita tetap butuh JS-nya
+import Swiper from 'swiper/bundle';
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Swiper.js Carousel for Homepage Hero Section
+    const heroSwiperEl = document.querySelector('.homepage-hero-swiper');
+    if (heroSwiperEl) {
+        const heroSwiper = new Swiper(heroSwiperEl, { 
+            loop: true,
+            slidesPerView: 1,
+            
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            
+            on: {
+                'play-video': function () {
+                    this.autoplay.stop();
+                },
+                slideChange: function () {
+                    this.autoplay.start();
+                }
+            }
+        });
+
+        window.addEventListener('stopHeroCarousel', () => {
+            if (heroSwiper && heroSwiper.autoplay) {
+                heroSwiper.autoplay.stop();
+            }
+        });
+    }
 
     // 1. Swiper.js Carousel for Homepage About Section
     const aboutSwiperEl = document.querySelector('.homepage-about-swiper');
     if (aboutSwiperEl) {
         new Swiper(aboutSwiperEl, {
-            // Kita tidak perlu lagi mengimpor modul di sini karena 'swiper/bundle' sudah mencakup semuanya
             loop: true,
             autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
+                delay: 2000,
+                disableOnInteraction: true,
             },
             pagination: {
                 el: '.swiper-pagination',
@@ -26,19 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-        });
-    }
-
-
-    // 2. Infinite Scroller for Testimonials
-    const testimonialContainer = document.getElementById('testimonial-container');
-    if (testimonialContainer && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        testimonialContainer.setAttribute("data-animated", "true");
-
-        const columns = testimonialContainer.querySelectorAll('.testimonial-column');
-        columns.forEach(column => {
-            const content = column.innerHTML;
-            column.innerHTML += content;
         });
     }
 });

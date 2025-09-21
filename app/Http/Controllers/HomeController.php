@@ -55,10 +55,13 @@ class HomeController extends Controller
         $carouselLabs = $this->getFromApi('carousel/laboratories');
         $standards = $this->getFromApi('standards');
         $reviews = $this->getFromApi('review');
+        $youtubeLinks = $this->getFromApi('youtube');
         return view('pages.home', [
             'carouselLabs' => $carouselLabs['data'] ?? [],
             'standards' => $standards['data'] ?? [],
-            'reviews' => $reviews['data'] ?? [],
+            // 'reviews' => $reviews['data'] ?? [],
+            'reviews' => $reviews ?? [],
+            'youtubeLinks' => $youtubeLinks['data'] ?? [],
         ]);
     }
 }

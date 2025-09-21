@@ -1,182 +1,114 @@
 {{--
-  Halaman Detail Fasilitas.
+  Halaman Detail Fasilitas (Versi Baru: Fokus pada Peralatan)
 --}}
 @extends('layouts.app')
 
 @section('title', ($facility['name'] ?? 'Detail Fasilitas') . ' | Lab. Teknik Sipil Unsoed')
-@section('description', $facility['description'] ?? 'Detail fasilitas dan layanan yang tersedia di Laboratorium Teknik Sipil Unsoed.')
+@section('description', $facility['description'] ?? 'Peralatan dan detail fasilitas yang tersedia di Laboratorium Teknik Sipil Unsoed.')
 
 @section('content')
 
   @if ($facility)
-    {{-- Header Section --}}
+    @php
+      // Pastikan 'images' dan 'equipments' selalu berupa array
+      $labImages = is_array($facility['images']) ? $facility['images'] : [$facility['images']];
+      $mainImage = $labImages[0] ?? null;
+      $equipments = $facility['equipments'] ?? [];
+    @endphp
+
+    {{-- Header Section: Informasi Utama Laboratorium --}}
     <section class="bg-sipil-base text-light-base section-padding-x pt-28 pb-16">
       <div class="max-w-screen-xl mx-auto">
-        <div class="flex flex-col md:flex-row gap-8">
-          {{-- Facility Image --}}
-          <div class="md:w-1/2">
-            <div class="relative w-full h-64 md:h-80 overflow-hidden rounded-lg">
-              <img
-                src="{{ config('services.api.storage_url') }}/{{ $facility['images'][0] ?? '' }}"
-                alt="{{ $facility['name'] }}"
-                class="object-cover w-full h-full"
-              />
+        <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+          
+          {{-- Gambar Laboratorium --}}
+          <div class="md:w-5/12 flex-shrink-0">
+            <div class="relative w-full aspect-w-4 aspect-h-3 overflow-hidden rounded-lg shadow-lg">
+              @if($mainImage)
+                <img
+                  src="{{ config('services.api.storage_url') }}/{{ $mainImage }}"
+                  alt="{{ $facility['name'] }}"
+                  class="object-cover w-full h-full"
+                />
+              @else
+                <div class="bg-gray-700 w-full h-full flex items-center justify-center">
+                  <span class="text-gray-400">Gambar tidak tersedia</span>
+                </div>
+              @endif
             </div>
           </div>
 
-          {{-- Facility Details --}}
-          <div class="md:w-1/2">
-            <div class="flex items-center gap-4 mb-4">
+          {{-- Detail Laboratorium --}}
+          <div class="md:w-7/12">
+            <div class="mb-4">
               <a href="{{ route('facilities.index') }}" class="text-blue-300 hover:text-white flex items-center text-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                Kembali ke Fasilitas
+                Kembali ke Daftar Fasilitas
               </a>
-              <span class="inline-block px-3 py-1 text-xs font-medium bg-blue-500 bg-opacity-20 text-blue-100 rounded-full">
-                {{ $facility['code'] }}
-              </span>
             </div>
-
-            <h1 class="text-3xl font-bold mb-2">{{ $facility['name'] }}</h1>
-
-            <div class="flex items-center text-sm mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-              <span>Ruangan: {{ $facility['room'] }}</span>
+            <span class="inline-block px-3 py-1 text-xs font-medium bg-blue-500 bg-opacity-20 text-blue-100 rounded-full mb-3">
+              {{ $facility['code'] }}
+            </span>
+            <h1 class="text-3xl md:text-4xl font-bold mb-3">{{ $facility['name'] }}</h1>
+            <div class="flex items-center text-sm mb-4 text-blue-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              <span>Lokasi: Ruang {{ $facility['room'] }}</span>
             </div>
-
-            <p class="text-light-base/80 mb-6 leading-relaxed">
+            <p class="text-light-base/80 leading-relaxed">
               {{ $facility['description'] }}
             </p>
-
-            <div class="grid grid-cols-2 gap-4 mb-8">
-              <div class="bg-light-base bg-opacity-10 rounded-lg p-4 text-center">
-                <div class="text-2xl font-bold text-emerald-800 mb-1">
-                  {{ count($facility['tests'] ?? []) }}
-                </div>
-                <div class="text-sm text-blue-800">
-                  Pengujian Tersedia
-                </div>
-              </div>
-              <div class="bg-light-base bg-opacity-10 rounded-lg p-4 text-center">
-                <div class="text-2xl font-bold text-orange-700 mb-1">
-                  {{ count($facility['packages'] ?? []) }}
-                </div>
-                <div class="text-sm text-blue-800">Paket Layanan</div>
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    {{-- Tests Detail Section --}}
-    @if (!empty($facility['tests']))
-      <section class="bg-gradient-to-b from-gray-50 to-white section-padding-x py-8 dark:bg-dark-base">
-        <div class="max-w-screen-xl mx-auto">
-          <div class="text-center mb-8">
-            <h2 class="text-4xl font-bold text-dark-base mb-4">
-              Layanan Pengujian Lengkap
-            </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-              Berbagai layanan pengujian profesional dengan standar kualitas tinggi di {{ $facility['name'] }}
-            </p>
-          </div>
-          <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-            @foreach ($facility['tests'] as $index => $test)
-              <div class="group bg-light-base rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-sipil-base/20 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sipil-base/5 to-blue-500/5 rounded-bl-2xl"></div>
-                <div class="relative">
-                  <div class="flex items-start justify-between mb-4">
-                    <div class="flex-1">
-                      <div class="flex items-center gap-2 mb-2">
-                        <span class="text-xs font-semibold text-sipil-base bg-sipil-base/10 px-2 py-1 rounded-full">
-                          #{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
-                        </span>
-                        <span class="text-xs px-2 py-1 rounded-full font-medium {{ $test['is_active'] ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                          {{ $test['is_active'] ? 'Tersedia' : 'Tidak Tersedia' }}
-                        </span>
-                      </div>
-                      <a href="{{ route('tests.show', ['slug' => $test['slug']]) }}">
-                        <h3 class="text-xl font-bold text-dark-base mb-2 group-hover:text-sipil-base transition-colors">
-                          {{ $test['name'] }}
-                        </h3>
-                      </a>
+    {{-- Main Content: Daftar Peralatan --}}
+    <section class="bg-gray-50 dark:bg-gray-900 section-padding-x py-16">
+      <div class="max-w-screen-xl mx-auto">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-dark-base dark:text-gray-100">Peralatan Laboratorium</h2>
+          <p class="text-gray-600 dark:text-gray-400 mt-2 max-w-2xl mx-auto">
+            Daftar peralatan yang tersedia di {{ $facility['name'] }} untuk mendukung kegiatan praktikum dan penelitian.
+          </p>
+        </div>
+
+        @if (!empty($equipments))
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach ($equipments as $equipment)
+              <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col group">
+                <div class="relative aspect-w-16 aspect-h-9 overflow-hidden">
+                  @if($equipment['image'])
+                    <img 
+                      src="{{ config('services.api.storage_url') }}/{{ $equipment['image'] }}" 
+                      alt="{{ $equipment['name'] }}" 
+                      class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    />
+                  @else
+                    <div class="bg-gray-200 w-full h-full flex items-center justify-center">
+                        <span class="text-gray-500 text-sm">Gambar tidak tersedia</span>
                     </div>
-                  </div>
-                  <p class="text-gray-600 text-sm mb-6 leading-relaxed line-clamp-3">
-                    {{ $test['description'] }}
+                  @endif
+                </div>
+                <div class="p-5 flex-grow flex flex-col">
+                  <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+                    {{ $equipment['name'] }}
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400 mt-2 text-sm flex-grow">
+                    {{ $equipment['description'] }}
                   </p>
-                  <div class="space-y-4 mb-6">
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span class="text-sm font-medium text-gray-700">Harga</span>
-                      <span class="text-lg font-bold text-sipil-base">
-                        Rp {{ number_format($test['price'] ?? 0, 0, ',', '.') }}
-                      </span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                      <div class="p-3 bg-blue-50 rounded-lg">
-                        <div class="text-xs text-gray-500">Min. Unit</div>
-                        <div class="text-sm font-semibold text-gray-700">{{ $test['minimum_unit'] }}</div>
-                      </div>
-                      <div class="p-3 bg-purple-50 rounded-lg">
-                        <div class="text-xs text-gray-500">Slot/Hari</div>
-                        <div class="text-sm font-semibold text-gray-700">{{ $test['daily_slot'] }}</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             @endforeach
           </div>
-        </div>
-      </section>
-    @endif
-
-    {{-- Packages Detail Section --}}
-    @if (!empty($facility['packages']))
-      <section class="bg-white section-padding-x py-16">
-        <div class="max-w-screen-xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-dark-base mb-4">
-              Paket Layanan Terintegrasi
-            </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-              Solusi paket lengkap dengan harga terjangkau untuk kebutuhan pengujian di {{ $facility['name'] }}
-            </p>
+        @else
+          <div class="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+            <p class="text-gray-500">Belum ada data peralatan untuk laboratorium ini.</p>
           </div>
-          <div class="grid md:grid-cols-2 gap-8">
-            @foreach ($facility['packages'] as $index => $pkg)
-              <div class="group bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-green-100 hover:border-green-200 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-green-400/10 to-blue-400/10 rounded-bl-3xl"></div>
-                <div class="relative">
-                  <h3 class="text-2xl font-bold text-dark-base mb-3 group-hover:text-green-700 transition-colors">{{ $pkg['name'] }}</h3>
-                  <p class="text-gray-600 text-sm mb-6 leading-relaxed">{{ $pkg['description'] }}</p>
-                  <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl p-6 mb-6 text-white">
-                    <div class="text-sm opacity-90 mb-1">Harga Paket</div>
-                    <div class="text-3xl font-bold">Rp {{ number_format($pkg['price'] ?? 0, 0, ',', '.') }}</div>
-                  </div>
-                </div>
-              </div>
-            @endforeach
-          </div>
-        </div>
-      </section>
-    @endif
-
-    {{-- Contact Section --}}
-    <section class="bg-gray-50 section-padding-x py-16">
-      <div class="max-w-screen-xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-dark-base mb-4">
-          Tertarik dengan Layanan Kami?
-        </h2>
-        <p class="text-gray-600 mb-8">
-          Hubungi kami untuk informasi lebih lanjut tentang layanan pengujian dan konsultasi.
-        </p>
-        <a href="{{ route('contact') }}" class="inline-flex items-center px-6 py-3 bg-sipil-base text-white font-medium rounded-lg hover:bg-sipil-base/90 transition-colors">
-          Hubungi Kami
-        </a>
+        @endif
       </div>
     </section>
-
+    
   @else
     {{-- Tampilan jika fasilitas tidak ditemukan --}}
     <section class="py-28 section-padding-x">

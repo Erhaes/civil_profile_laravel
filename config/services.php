@@ -40,4 +40,10 @@ return [
         'storage_url' => env('API_STORAGE_URL', 'https://reservasi.labsipilunsoed.com/storage'),
     ],
 
+    // local
+    // 'api' => [
+    //     'base_url' => env('API_BASE_URL', 'http://127.0.0.1:8000/'),
+    //     'storage_url' => env('API_STORAGE_URL', 'http://127.0.0.1:8000/storage'),
+    // ],
+
 ];

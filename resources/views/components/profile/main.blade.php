@@ -5,21 +5,21 @@
       <div class="flex overflow-x-auto scrollbar-hide py-2 space-x-4 mb-8 border-b border-gray-200 dark:border-gray-700">
         <button
           @click="activeTab = 'struktur'"
-          :class="{ 'border-sipil-base text-sipil-base': activeTab === 'struktur', 'border-transparent text-gray-500 hover:text-gray-700': activeTab !== 'struktur' }"
+          :class="{ 'border-sipil-base text-sipil-base dark:text-sipil-blue-accent': activeTab === 'struktur', 'border-transparent text-gray-500 hover:text-blue-base dark:text-blue-secondary': activeTab !== 'struktur' }"
           class="py-2 px-4 font-medium border-b-2 transition-colors whitespace-nowrap"
         >
           Struktur Organisasi
         </button>
         <button
           @click="activeTab = 'penelitian'"
-          :class="{ 'border-sipil-base text-sipil-base': activeTab === 'penelitian', 'border-transparent text-gray-500 hover:text-gray-700': activeTab !== 'penelitian' }"
+          :class="{ 'border-sipil-base text-sipil-base dark:text-sipil-blue-accent': activeTab === 'penelitian', 'border-transparent text-gray-500 hover:text-blue-base dark:text-blue-secondary': activeTab !== 'penelitian' }"
           class="py-2 px-4 font-medium border-b-2 transition-colors whitespace-nowrap"
         >
           Penelitian
         </button>
         <button
           @click="activeTab = 'sertifikasi'"
-          :class="{ 'border-sipil-base text-sipil-base': activeTab === 'sertifikasi', 'border-transparent text-gray-500 hover:text-gray-700': activeTab !== 'sertifikasi' }"
+          :class="{ 'border-sipil-base text-sipil-base dark:text-sipil-blue-accent': activeTab === 'sertifikasi', 'border-transparent text-gray-500 hover:text-blue-base dark:text-blue-secondary': activeTab !== 'sertifikasi' }"
           class="py-2 px-4 font-medium border-b-2 transition-colors whitespace-nowrap"
         >
           Standar Laboratorium

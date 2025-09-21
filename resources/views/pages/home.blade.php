@@ -20,7 +20,10 @@
   @include('components.homepage.facilities')
 
   {{-- 4. Accreditation Section --}}
-  @include('components.homepage.accreditation', ['standards' => $standards])
+  {{-- @include('components.homepage.accreditation', ['standards' => $standards]) --}}
+
+  {{-- 4. Kalibrasi alat section --}}
+  @include('components.homepage.standard')
   
   {{-- 5. Testimonial Section --}}
   @include('components.homepage.testimonial', ['reviews' => $reviews])
