@@ -1,5 +1,5 @@
 {{--
-  Konten untuk tab Standar Laboratorium (Sertifikasi).
+  Konten untuk tab Standar Laboratorium.
 --}}
 <div
   x-data="{
@@ -55,14 +55,14 @@
     <div x-show="standards.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <template x-for="standard in standards" :key="standard.id">
         <div class="flex bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm p-4">
-          <div class="w-16 h-16 bg-white rounded-md flex-shrink-0 flex items-center justify-center border dark:border-gray-700 overflow-hidden">
+          {{-- <div class="w-16 h-16 bg-white rounded-md flex-shrink-0 flex items-center justify-center border dark:border-gray-700 overflow-hidden">
             <img 
               :src="standard.foto ? '{{ config('services.api.storage_url') }}/' + standard.foto : '{{ asset('images/accreditations/iso-certification.jpg') }}'" 
               :alt="standard.nama" 
               class="w-full h-full object-cover"
               loading="lazy"
             />
-          </div>
+          </div> --}}
           <div class="ml-4 flex-1">
             <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200" x-text="standard.nama"></h3>
             <p class="text-gray-600 dark:text-gray-400 mt-2 text-sm" x-text="standard.deskripsi"></p>

@@ -1,32 +1,24 @@
-
 <div
   x-data="{
-    team: [],
+    groupedTeams: {},
     loading: true,
     error: '',
-    fetchTeam: function() {
+    fetchGroupedTeam: function() {
       this.loading = true;
-      fetch('{{ config('services.api.base_url') }}/team')
+      fetch('{{ route('api.team-data') }}')
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Gagal memuat data pejabat struktural.');
-            }
+            if (!response.ok) throw new Error('Gagal memuat data pejabat struktural.');
             return response.json();
         })
         .then(data => {
-            this.team = data.data;
+            this.groupedTeams = data.grouped_teams;
             this.error = '';
         })
-        .catch(error => {
-            this.error = error.message;
-            console.error('Fetch team error:', error);
-        })
-        .finally(() => {
-            this.loading = false;
-        });
+        .catch(error => { this.error = error.message; })
+        .finally(() => { this.loading = false; });
     }
   }"
-  x-init="fetchTeam()"
+  x-init="fetchGroupedTeam()"
 >
   <div class="mb-8">
     <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded flex justify-center">
@@ -52,20 +44,28 @@
   
   {{-- Content --}}
   <template x-if="!loading && !error">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <template x-for="pejabat in team" :key="pejabat.id">
-        <div class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-          <div class="aspect-square bg-gray-200 dark:bg-gray-700">
-            <img 
-              :src="pejabat.photo ? '{{ config('services.api.storage_url') }}/' + pejabat.photo : '{{ asset('images/staff/placeholder-profile.jpg') }}'" 
-              :alt="'Foto ' + pejabat.name" 
-              class="w-full h-full object-cover" 
-              loading="lazy"
-            />
-          </div>
-          <div class="p-4">
-            <h4 class="font-semibold text-lg text-gray-800 dark:text-gray-200" x-text="pejabat.name"></h4>
-            <p class="text-sipil-base" x-text="pejabat.position.name"></p>
+    <div class="space-y-8">
+      <template x-for="(members, hierarchy) in groupedTeams" :key="hierarchy">
+        <div class="w-full">
+          <div class="flex flex-wrap justify-center gap-4">
+            <template x-for="pejabat in members" :key="pejabat.id">
+              <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
+                  <div class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
+                    <div class="aspect-square bg-gray-200 dark:bg-gray-700">
+                      <img 
+                        :src="pejabat.photo ? '{{ config('services.api.storage_url') }}/' + pejabat.photo : '{{ asset('images/staff/placeholder-profile.jpg') }}'" 
+                        :alt="'Foto ' + pejabat.name" 
+                        class="w-full h-full object-cover" 
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="p-3 text-center flex-grow flex flex-col justify-center">
+                      <h4 class="font-semibold text-base text-gray-800 dark:text-gray-200 line-clamp-1" x-text="pejabat.name"></h4>
+                      <p class="text-sm text-sipil-base dark:text-sipil-blue-accent line-clamp-1" x-text="pejabat.position.name"></p>
+                    </div>
+                  </div>
+              </div>
+            </template>
           </div>
         </div>
       </template>

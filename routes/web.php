@@ -40,3 +40,6 @@ Route::get('/berita/{slug}', [NewsController::class, 'newsDetail'])->name('news.
 
 // Rute untuk menangani pengiriman formulir kontak
 Route::post('/kontak', [ContactController::class, 'submit'])->name('contact.submit');
+
+// Rute untuk grouping team
+Route::get('/api/team-data', [ProfileController::class, 'fetchTeamData'])->name('api.team-data');
